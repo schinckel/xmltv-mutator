@@ -1,6 +1,6 @@
 IMAGE := schinckel/xmltv-mutator
 
-.PHONY: release
+.PHONY: release bump-major bump-minor
 
 requirements.txt: poetry.lock pyproject.toml
 	poetry export -o requirements.txt
@@ -49,3 +49,6 @@ release: Dockerfile VERSION
 
 	docker manifest push $(IMAGE):$(shell cat VERSION)
 	docker manifest push $(IMAGE):latest
+
+	git tag $(shell cat VERSION)
+	git push --tag
