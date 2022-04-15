@@ -45,6 +45,19 @@ def not_sbs(programme):
     return programme['channel'][0] != '3'
 
 
+def movie(programme):
+    return any(
+        'movie' in category.text.lower()
+        for category in programme.find_all('category')
+    )
+
+
+def force_movie(programme):
+    element = BeautifulSoup().new_tag('category')
+    element.append('Movie')
+    programme.append(element)
+
+
 _mutations = [
     (
         [none_of('previously-shown', 'premiere', 'new'), not_sbs],
@@ -53,7 +66,8 @@ _mutations = [
     (
         all_of('previously-shown', 'premiere'),
         replace_element('premiere', 'repeat')
-    )
+    ),
+    (movie, force_movie),
 ]
 
 

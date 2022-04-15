@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+- Add `<category>Movie</category>` when another category containing the word movie is detected. This is required by Channels to mark as a movie.
+
 ## 0.1.3
 
 - Some programmes have both "previously-shown" and "premiere" tags, in that case we should strip the "premiere" tag. In order to get this to work, it is replaced with "<repeat>".
